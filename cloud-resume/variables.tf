@@ -1,10 +1,10 @@
-variable profile {
+variable "profile" {
   type        = string
   default     = "default"
   description = "default profile"
 }
 
-variable region {
-    type = string
-    default = "eu-west-2"
+variable "region" {
+  type    = string
+  default = "eu-west-2"
 }
