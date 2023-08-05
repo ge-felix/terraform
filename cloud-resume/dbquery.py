@@ -11,8 +11,9 @@ def lambda_handler(event, context):
     table = dynamodb.Table(table_name)
     
     # Retrieve input variables from the Lambda event
-    browser_info = event.get('browser_info', 'Unknown')
-    time_accessed = event.get('time_accessed', str(int(time.time())))
+    body = json.loads(event.get('body', '{}'))
+    browser_info = body.get('browser_info', 'Unknown')
+    time_accessed = body.get('time_accessed', 'N/A')
     
     # Insert data into the table
     response = table.put_item(
@@ -31,6 +32,6 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps({
             'inserted_records': f"Inserted {response['ResponseMetadata']['RequestId']} records.",
-            'total_rows': f"Total rows in the table: {total_rows}"
+            'total_rows': f"{total_rows}"
         })
     }
