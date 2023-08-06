@@ -7,6 +7,11 @@ resource "aws_cloudfront_origin_access_control" "site_access" {
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
+
+  depends_on = [
+    aws_acm_certificate.cloud_resume,
+    aws_acm_certificate_validation.cloud_resume
+  ]
   origin {
     domain_name              = aws_s3_bucket.static_hosting.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.site_access.id
@@ -44,6 +49,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate.cloud_resume.arn
+    minimum_protocol_version = "TLSv1.2_2021"
+    ssl_support_method = "sni-only"
   }
+
+   aliases = ["cv.${var.mydomain}"]
+  
 }

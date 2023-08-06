@@ -8,3 +8,8 @@ variable "region" {
   type    = string
   default = "eu-west-2"
 }
+
+variable "mydomain" {
+  type    = string
+  default = "georgefelix.net"
+}
