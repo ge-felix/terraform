@@ -34,7 +34,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       }
     }
 
-    viewer_protocol_policy = "https-only"
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   restrictions {
