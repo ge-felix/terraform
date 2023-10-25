@@ -39,21 +39,28 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   restrictions {
     geo_restriction {
-      restriction_type = "whitelist"
-      locations        = ["US", "CA", "GB", "DE", "IN"]
+      restriction_type = "none"
+      locations        = []
     }
   }
+
+  #restrictions {
+  #   geo_restriction {
+  #     restriction_type = "whitelist"
+  #     locations        = ["US", "CA", "GB", "DE", "IN"]
+  #   }
+  # }
 
   tags = {
     description = "Static site cloudfront distribution."
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.cloud_resume.arn
+    acm_certificate_arn      = aws_acm_certificate.cloud_resume.arn
     minimum_protocol_version = "TLSv1.2_2021"
-    ssl_support_method = "sni-only"
+    ssl_support_method       = "sni-only"
   }
 
-   aliases = ["cv.${var.mydomain}"]
-  
+  aliases = ["cv.${var.mydomain}"]
+
 }

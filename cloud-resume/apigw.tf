@@ -1,11 +1,11 @@
 resource "aws_apigatewayv2_api" "myapi" {
   name          = "myapi"
   protocol_type = "HTTP"
-  	cors_configuration {
-		allow_origins = ["*"]
-        allow_methods = ["POST"]
-        allow_headers = ["Content-Type"]
-	}
+  cors_configuration {
+    allow_origins = ["*"]
+    allow_methods = ["POST"]
+    allow_headers = ["Content-Type"]
+  }
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
@@ -30,11 +30,11 @@ resource "aws_apigatewayv2_deployment" "myapi_deployment" {
   description = "myapi deployment"
   #Trigger an auto deploy https://github.com/hashicorp/terraform-provider-aws/issues/162#issuecomment-532593939
   #triggers = {
-    #redeployment = sha1(jsonencode([
-    #  aws_apigatewayv2_api.myapi,
-    #  aws_apigatewayv2_integration.lambda_integration,
-    #  aws_apigatewayv2_route.myapi_route,
-    #]))
+  #redeployment = sha1(jsonencode([
+  #  aws_apigatewayv2_api.myapi,
+  #  aws_apigatewayv2_integration.lambda_integration,
+  #  aws_apigatewayv2_route.myapi_route,
+  #]))
   #}
 
   lifecycle {

@@ -1,5 +1,5 @@
 data "aws_route53_zone" "main" {
-  name = "${var.mydomain}"
+  name = var.mydomain
 }
 
 resource "aws_route53_record" "cloud_resume" {
@@ -21,7 +21,7 @@ resource "aws_route53_record" "cloud_resume" {
 
 resource "aws_route53_record" "cloudfront_cname" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "cv"  # Subdomain name, e.g., cdn.yourdomain.com
+  name    = "cv" # Subdomain name, e.g., cdn.yourdomain.com
   type    = "CNAME"
   ttl     = "300"
   records = [aws_cloudfront_distribution.s3_distribution.domain_name]

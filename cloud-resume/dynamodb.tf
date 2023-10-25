@@ -4,8 +4,8 @@ resource "aws_dynamodb_table" "browser_time_table" {
   read_capacity  = 2
   write_capacity = 2
 
-  hash_key       = "BrowserInfo"
-  range_key      = "TimeAccessed"
+  hash_key  = "BrowserInfo"
+  range_key = "TimeAccessed"
 
   attribute {
     name = "BrowserInfo"
